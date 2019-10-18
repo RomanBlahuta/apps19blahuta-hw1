@@ -147,12 +147,10 @@ public class TemperatureSeriesAnalysis {
             if (abs(this.temperatureSeries[i] - tempValue) < abs(closest - tempValue)) {
                 closest = this.temperatureSeries[i];
             }
-            else if (abs(this.temperatureSeries[i] - tempValue) == abs(closest - tempValue)) {
-                if (this.temperatureSeries[i] == abs(closest)) {
+            else if (abs(this.temperatureSeries[i] - tempValue) == abs(closest - tempValue) && this.temperatureSeries[i] == abs(closest)) {
                     closest = this.temperatureSeries[i];
                 }
             }
-        }
         return closest;
     }
 
@@ -222,8 +220,7 @@ public class TemperatureSeriesAnalysis {
 
     public int addTemps(double... temps) {
 
-        if (temps.length > 0) {
-            if (this.logicalSize == this.temperatureSeries.length) {
+        if (temps.length > 0 && this.logicalSize == this.temperatureSeries.length) {
 
                 double[] newSeries = new double[this.temperatureSeries.length * 2];
                 this.logicalSize += temps.length;
@@ -238,7 +235,6 @@ public class TemperatureSeriesAnalysis {
                 }
 
                 this.temperatureSeries = newSeries;
-            }
         }
         return this.logicalSize;
     }
