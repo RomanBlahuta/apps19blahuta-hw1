@@ -2,7 +2,9 @@ package ua.edu.ucu.tempseries;
 
 import java.util.InputMismatchException;
 
-import static java.lang.Math.*;
+import static java.lang.Math.pow;
+import static java.lang.Math.sqrt;
+import static java.lang.Math.abs;
 
 public class TemperatureSeriesAnalysis {
     private double[] temperatureSeries;
@@ -18,8 +20,9 @@ public class TemperatureSeriesAnalysis {
     //Init with parameters
     public TemperatureSeriesAnalysis(double[] temperatureSeries) {
         int invalValues = 0;
+        double absZero = -273.0;
         for (int i = 0; i < temperatureSeries.length; i++) {
-            if (temperatureSeries[i] < -273.0) {
+            if (temperatureSeries[i] < absZero) {
                 invalValues++;
             }
         }
@@ -143,10 +146,12 @@ public class TemperatureSeriesAnalysis {
         double closest = this.temperatureSeries[0];
 
         for (int i = 1; i < this.temperatureSeries.length; i++) {
-            if (abs(this.temperatureSeries[i] - tempValue) < abs(closest - tempValue)) {
+            if (abs(this.temperatureSeries[i]-tempValue)<abs(closest-tempValue))
+            {
                 closest = this.temperatureSeries[i];
             }
-            else if (abs(this.temperatureSeries[i] - tempValue) == abs(closest - tempValue)) {
+            else if (abs(this.temperatureSeries[i]-tempValue)==abs(closest-tempValue))
+            {
                 if (this.temperatureSeries[i] == abs(closest)) {
                     closest = this.temperatureSeries[i];
                 }
@@ -211,10 +216,10 @@ public class TemperatureSeriesAnalysis {
             throw new IllegalArgumentException("Empty array");
         }
 
-        final TempSummaryStatistics statistics = new TempSummaryStatistics(
+        final TempSummaryStatistics STATISTICS = new TempSummaryStatistics(
                 this.average(), this.deviation(), this.min(), this.max()
         );
-        return statistics;
+        return STATISTICS;
     }
 
 
