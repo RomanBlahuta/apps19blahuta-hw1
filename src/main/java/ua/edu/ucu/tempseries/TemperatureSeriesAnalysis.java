@@ -3,9 +3,10 @@ package ua.edu.ucu.tempseries;
 import java.util.InputMismatchException;
 
 public class TemperatureSeriesAnalysis {
+    public static final double ABS_ZERO = -273.0;
     private double[] temperatureSeries;
     private int logicalSize;
-    public static final double absZERO = -273.0;
+
 
     //Default init
     public TemperatureSeriesAnalysis() {
@@ -18,7 +19,7 @@ public class TemperatureSeriesAnalysis {
     public TemperatureSeriesAnalysis(double[] temperatureSeries) {
         int invalValues = 0;
         for (int i = 0; i < temperatureSeries.length; i++) {
-            if (temperatureSeries[i] < absZERO) {
+            if (temperatureSeries[i] < ABS_ZERO) {
                 invalValues++;
             }
         }
@@ -60,7 +61,7 @@ public class TemperatureSeriesAnalysis {
         double avg = this.average();
 
         for (int i = 0; i < this.temperatureSeries.length; i++) {
-            dev += Math.pow((temperatureSeries[i] - avg), 2);
+            dev += (temperatureSeries[i] - avg)*(temperatureSeries[i] - avg);
         }
         dev /= this.temperatureSeries.length;
         dev = Math.sqrt(dev);
@@ -142,12 +143,12 @@ public class TemperatureSeriesAnalysis {
         double closest = this.temperatureSeries[0];
 
         for (int i = 1; i < this.temperatureSeries.length; i++) {
-            if (Math.abs(this.temperatureSeries[i] - tempValue) <
-                    Math.abs(closest - tempValue)) {
+            if (Math.abs(this.temperatureSeries[i] - tempValue)
+                    < Math.abs(closest - tempValue)) {
                 closest = this.temperatureSeries[i];
             }
-            else if (Math.abs(this.temperatureSeries[i] - tempValue) ==
-                    Math.abs(closest - tempValue)
+            else if (Math.abs(this.temperatureSeries[i] - tempValue)
+                    == Math.abs(closest - tempValue)
                     && this.temperatureSeries[i] == Math.abs(closest)) {
                     closest = this.temperatureSeries[i];
                 }
