@@ -28,7 +28,9 @@ public class TemperatureSeriesAnalysis {
             throw new InputMismatchException("Values less than -273.0");
         }
         else {
-            this.temperatureSeries = temperatureSeries;
+            System.arraycopy(this.temperatureSeries,
+                    0, temperatureSeries,
+                    0, temperatureSeries.length);
             this.logicalSize = this.temperatureSeries.length;
         }
     }
