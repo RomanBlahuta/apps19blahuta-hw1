@@ -3,7 +3,8 @@ package ua.edu.ucu.tempseries;
 import java.util.InputMismatchException;
 
 public class TemperatureSeriesAnalysis {
-    public static final double ABS_ZERO = -273.0;
+    private static final double THRESHOLD = .0001;
+    private static final double ABS_ZERO = -273.0;
     private double[] temperatureSeries;
     private int logicalSize;
 
@@ -148,7 +149,7 @@ public class TemperatureSeriesAnalysis {
                 closest = this.temperatureSeries[i];
             }
             else if (Math.abs(this.temperatureSeries[i] - tempValue)
-                    == Math.abs(closest - tempValue)
+                    - Math.abs(closest - tempValue) <= THRESHOLD
                     && this.temperatureSeries[i] == Math.abs(closest)) {
                     closest = this.temperatureSeries[i];
                 }
