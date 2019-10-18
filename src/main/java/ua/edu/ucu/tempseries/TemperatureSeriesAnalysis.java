@@ -222,9 +222,11 @@ public class TemperatureSeriesAnalysis {
 
     public int addTemps(double... temps) {
 
-        if (temps.length > 0 && this.logicalSize == this.temperatureSeries.length) {
+        if (temps.length > 0 && this.logicalSize
+                == this.temperatureSeries.length) {
 
-                double[] newSeries = new double[this.temperatureSeries.length * 2];
+                double[] newSeries
+                        = new double[this.temperatureSeries.length * 2];
                 this.logicalSize += temps.length;
 
                 for (int i = 0; i < this.logicalSize; i++) {
