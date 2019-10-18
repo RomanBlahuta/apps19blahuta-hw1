@@ -2,12 +2,10 @@ package ua.edu.ucu.tempseries;
 
 import java.util.InputMismatchException;
 
-import static java.lang.Math.*;
-
 public class TemperatureSeriesAnalysis {
     private double[] temperatureSeries;
     private int logicalSize;
-    final private double ABSZERO = -273.0;
+    private static final double absZERO = -273.0;
 
     //Default init
     public TemperatureSeriesAnalysis() {
@@ -20,7 +18,7 @@ public class TemperatureSeriesAnalysis {
     public TemperatureSeriesAnalysis(double[] temperatureSeries) {
         int invalValues = 0;
         for (int i = 0; i < temperatureSeries.length; i++) {
-            if (temperatureSeries[i] < ABSZERO) {
+            if (temperatureSeries[i] < absZERO) {
                 invalValues++;
             }
         }
@@ -62,10 +60,10 @@ public class TemperatureSeriesAnalysis {
         double avg = this.average();
 
         for (int i = 0; i < this.temperatureSeries.length; i++) {
-            dev += pow((temperatureSeries[i] - avg), 2);
+            dev += Math.pow((temperatureSeries[i] - avg), 2);
         }
         dev /= this.temperatureSeries.length;
-        dev = sqrt(dev);
+        dev = Math.sqrt(dev);
         return dev;
     }
 
@@ -122,7 +120,7 @@ public class TemperatureSeriesAnalysis {
         double closest = this.temperatureSeries[0];
 
         for (int i = 1; i < this.temperatureSeries.length; i++) {
-            if (abs(this.temperatureSeries[i]) < closest) {
+            if (Math.abs(this.temperatureSeries[i]) < closest) {
                 closest = this.temperatureSeries[i];
             }
         }
@@ -144,10 +142,13 @@ public class TemperatureSeriesAnalysis {
         double closest = this.temperatureSeries[0];
 
         for (int i = 1; i < this.temperatureSeries.length; i++) {
-            if (abs(this.temperatureSeries[i] - tempValue) < abs(closest - tempValue)) {
+            if (Math.abs(this.temperatureSeries[i] - tempValue) <
+                    Math.abs(closest - tempValue)) {
                 closest = this.temperatureSeries[i];
             }
-            else if (abs(this.temperatureSeries[i] - tempValue) == abs(closest - tempValue) && this.temperatureSeries[i] == abs(closest)) {
+            else if (Math.abs(this.temperatureSeries[i] - tempValue) ==
+                    Math.abs(closest - tempValue)
+                    && this.temperatureSeries[i] == Math.abs(closest)) {
                     closest = this.temperatureSeries[i];
                 }
             }
