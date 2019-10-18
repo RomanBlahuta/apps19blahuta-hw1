@@ -5,7 +5,7 @@ import java.util.InputMismatchException;
 public class TemperatureSeriesAnalysis {
     private double[] temperatureSeries;
     private int logicalSize;
-    private static final double absZERO = -273.0;
+    public static final double absZERO = -273.0;
 
     //Default init
     public TemperatureSeriesAnalysis() {
