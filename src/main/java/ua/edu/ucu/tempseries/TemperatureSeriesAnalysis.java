@@ -2,13 +2,12 @@ package ua.edu.ucu.tempseries;
 
 import java.util.InputMismatchException;
 
-import static java.lang.Math.pow;
-import static java.lang.Math.sqrt;
-import static java.lang.Math.abs;
+import static java.lang.Math.*;
 
 public class TemperatureSeriesAnalysis {
     private double[] temperatureSeries;
     private int logicalSize;
+    final private double ABSZERO = -273.0;
 
     //Default init
     public TemperatureSeriesAnalysis() {
@@ -20,9 +19,8 @@ public class TemperatureSeriesAnalysis {
     //Init with parameters
     public TemperatureSeriesAnalysis(double[] temperatureSeries) {
         int invalValues = 0;
-        double absZero = -273.0;
         for (int i = 0; i < temperatureSeries.length; i++) {
-            if (temperatureSeries[i] < absZero) {
+            if (temperatureSeries[i] < ABSZERO) {
                 invalValues++;
             }
         }
@@ -146,12 +144,10 @@ public class TemperatureSeriesAnalysis {
         double closest = this.temperatureSeries[0];
 
         for (int i = 1; i < this.temperatureSeries.length; i++) {
-            if (abs(this.temperatureSeries[i]-tempValue)<abs(closest-tempValue))
-            {
+            if (abs(this.temperatureSeries[i] - tempValue) < abs(closest - tempValue)) {
                 closest = this.temperatureSeries[i];
             }
-            else if (abs(this.temperatureSeries[i]-tempValue)==abs(closest-tempValue))
-            {
+            else if (abs(this.temperatureSeries[i] - tempValue) == abs(closest - tempValue)) {
                 if (this.temperatureSeries[i] == abs(closest)) {
                     closest = this.temperatureSeries[i];
                 }
